@@ -6,8 +6,9 @@
 <p>&nbsp;</p>
 
 <p>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 	<a href="http://notepad-plus-plus.org"><img src="http://img651.imageshack.us/img651/3922/notepadg.png" alt="Notepad++"></a>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 	<a href="http://nginx.org/"><img src="http://wiki.nginx.org/local/nginx-logo.png" alt="Nginx"></a>
 </p>
 
@@ -16,17 +17,17 @@
 
 <h4>Installation Instructions</h4>
 
-1. Save *`userDefineLang.xml`* to your computer
+1. Save `userDefineLang.xml` to your computer
 2. Open Notepad++
-3. Click *View* > *User-defined Dialogue...*
-4. Click *Import* and navigation to *`userDefineLang.xml`*
+3. Click _View_ > _User-defined Dialogue..._
+4. Click _Import_ and navigation to `userDefineLang.xml`
 5. Import it and restart Notepad++
-6. Open an Nginx config file (e.g., *`/etc/nginx/nginx.conf`*)
-7. If you already have the *`.conf`* extension assigned to another syntax highlighter, you'll need to select the Nginx hilighter explicitly by clicking *Language* > *Nginx* 
+6. Open an Nginx config file (e.g., `/etc/nginx/nginx.conf`)
+7. If you already have the `.conf` extension assigned to another syntax highlighter, you'll need to select the Nginx highlighter explicitly by clicking _Language_ > _Nginx_ 
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
-<p><b>NOTE: </b> this language file only highlights the directives listed on the <a href="http://wiki.nginx.org/HttpCoreModule#Directives">HttpCoreModule</a> page at the time of writing. If you notice some directives aren't being highlighted, you can open the <b>User-Defined Dialogue</b> menu again and add them to the list under the <b>Keywords List</b> tab.</p>
+<p><b>NOTE:&nbsp; </b> this language file only highlights the directives listed on the <a href="http://wiki.nginx.org/HttpCoreModule#Directives">HttpCoreModule</a> page at the time of writing. If you notice some directives aren't being highlighted, you can open the <b>User-Defined Dialogue</b> menu again and add them to the list under the <b>Keywords List</b> tab.</p>
 
 <p>For information on configuring user-defined language files, see <a href="http://sourceforge.net/apps/mediawiki/notepad-plus/index.php?title=User_Defined_Languages">User Defined Language Files</a>.</p>
