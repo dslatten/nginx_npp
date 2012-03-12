@@ -5,6 +5,10 @@
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
+<p><img src="http://img27.imageshack.us/img27/1876/nginxnpp.png" alt="Syntax Highlighting for Nginx Configuration Files"></p>
+
+<p>&nbsp;</p>
+
 <p>
 	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 	<a href="http://notepad-plus-plus.org"><img src="http://img651.imageshack.us/img651/3922/notepadg.png" alt="Notepad++"></a>
