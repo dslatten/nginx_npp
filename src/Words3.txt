@@ -1,0 +1,30 @@
+Words3
+======
+
+If you would like to view or edit the keywords contained in the Words3 
+list, I have provided them here for your convenience. This file has no 
+functional purpose. Editing this file will not alter the behavior of the 
+nginx syntax highlighter in NPP. You must still open the "User-Defined 
+Dialogue..." menu (under "View" on the NPP toolbar) and paste the edited 
+keyword list into the appropriate box on the "Keyword Lists" tab. 
+
+The list is given here twice--one is separated by spaces (for easy 
+copying + pasting); the other is separated by newline characters (for 
+easy searching and readability). 
+
+The keywords in this list represent the main structural components of an 
+nginx configuration. The first 4 keywords are the nginx "context" 
+blocks, and the 5th keyword ("include") seems equally important on a 
+structural level, so I included it in this list. 
+
+
+
+http server events location include
+
+
+
+http
+server
+events
+location
+include

@@ -1,0 +1,59 @@
+Words2
+======
+
+As you can see, the second list of keywords is pretty short. This text 
+file exists mostly because I'm a perfectionist and I want to see a "src 
+file" for every keyword set. Note that this keyword "list" uses 
+Notepad++'s "Prefix mode," which means any string that starts with "@" 
+will be highlighted as a keyword.
+
+In nginx configuration files, strings that start with "@" indicate a named 
+location. Here is the explanation from nginx.org: 
+
+The prefix "@" specifies a named location. Such locations are not used 
+during normal processing of requests, they are intended only to process 
+internally redirected requests (see error_page, try_files). 
+
+--------------------------------------------------------------------------------
+
+[error_page](http://wiki.nginx.org/HttpCoreModule#error_page):
+
+    If there is no need to change URI during redirection it is possible to 
+    redirect processing of error pages into a named location: 
+
+        location / (
+            error_page 404 @fallback;
+        )
+    
+        location @fallback (
+            proxy_pass http://backend;
+        )
+
+--------------------------------------------------------------------------------
+
+[try_files](http://wiki.nginx.org/HttpCoreModule#try_files):
+
+    In this example, the directive try_files
+
+        try_files $uri $uri/ /index.php?q=$uri&$args;
+    
+    ...is basically the same as this:
+
+        location / {
+            error_page     404 = @drupal;
+            log_not_found  off;
+        }
+        
+        location @drupal {
+            rewrite ^ /index.php?q=$uri last; # for drupal 6
+        }
+
+--------------------------------------------------------------------------------
+
+
+
+@
+
+
+
+@

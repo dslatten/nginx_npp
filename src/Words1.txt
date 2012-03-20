@@ -1,0 +1,38 @@
+Words1
+======
+
+If you would like to view or edit the keywords contained in the Words1 
+list, I have provided them here for your convenience. This file has no 
+functional purpose. Editing this file will not alter the behavior of the 
+nginx syntax highlighter in NPP. You must still open the "User-Defined 
+Dialogue..." menu (under "View" on the NPP toolbar) and paste the edited 
+keyword list into the appropriate box on the "Keyword Lists" tab. 
+
+The list is given here twice--one is separated by spaces (for easy 
+copying + pasting); the other is separated by newline characters (for 
+easy searching and readability). Both lists are sorted alphabetically. 
+
+NOTE: These keywords use Notepad++'s "Prefix mode," which means any 
+string that starts with these keywords will be highlighted as a keyword. 
+For example, you do not need to include HTTP_REFERER and HTTP_HOST (or 
+any other HTTP variables), because these are all matched by the "HTTP_" 
+keyword. 
+
+
+
+$ CONTENT_ DOCUMENT_ GATEWAY_ HTTP_ HTTPS QUERY_ REDIRECT_ REMOTE_ REQUEST_ SCRIPT_ SERVER_
+
+
+
+$
+CONTENT_
+DOCUMENT_
+GATEWAY_
+HTTP_
+HTTPS
+QUERY_
+REDIRECT_
+REMOTE_
+REQUEST_
+SCRIPT_
+SERVER_
