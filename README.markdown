@@ -16,13 +16,13 @@
 4. Click `Import` and navigate to `userDefineLang_nginx.xml`
 5. Import it and restart Notepad++
 6. Open an Nginx config file (e.g., `/etc/nginx/nginx.conf`)
-7. If you already have the `.conf` extension assigned to another syntax highlighter, you'll need to select the Nginx highlighter explicitly by clicking _Language_ > _Nginx_ 
+7. If you already have the `.conf` extension assigned to another syntax highlighter, you'll need to select the Nginx highlighter explicitly by clicking `Language` > `Nginx` 
 
 <h4>Note</h4>
 
 <p>This language file highlights the directives listed on the <a href="http://wiki.nginx.org/HttpCoreModule#Directives">HttpCoreModule</a> page and the <a href="http://nginx.org/en/docs/dirindex.html">Alphabetical Index of Directives</a> page.<p>
 
-<p>If you want to customize this language file or review the list of variables and directives that this file highlights, I've added some text files to help you with that. They are located in the `src` folder. For information on configuring user-defined language files, see <a href="http://sourceforge.net/apps/mediawiki/notepad-plus/index.php?title=User_Defined_Languages">User Defined Language Files</a>.</p>
+<p>If you want to customize this language file or review the list of variables and directives that this file highlights, I've added some text files to help you with that. They are located in the <a href="https://github.com/dslatten/nginx_npp/tree/master/src"><code>src</code></a> folder. For information on configuring user-defined language files, see <a href="http://sourceforge.net/apps/mediawiki/notepad-plus/index.php?title=User_Defined_Languages">User Defined Language Files</a>.</p>
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>
