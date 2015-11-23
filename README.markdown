@@ -12,7 +12,7 @@
 
 1. Save <a href="https://raw.github.com/dslatten/nginx_npp/master/userDefineLang_nginx.xml"><code>userDefineLang_nginx.xml</code></a> to your computer
 2. Open Notepad++
-3. Click `View` > `User-defined Dialogue...`
+3. Click `Language` > `Define your language...`
 4. Click `Import` and navigate to `userDefineLang_nginx.xml`
 5. Import it and restart Notepad++
 6. Open an Nginx config file (e.g., `/etc/nginx/nginx.conf`)
