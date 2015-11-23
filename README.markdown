@@ -31,7 +31,7 @@
 	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 	<a href="http://notepad-plus-plus.org"><img src="http://img651.imageshack.us/img651/3922/notepadg.png" alt="Notepad++"></a>
 	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-	<a href="http://nginx.org/"><img src="http://wiki.nginx.org/local/nginx-logo.png" alt="Nginx"></a>
+	<a href="http://nginx.org/"><img src="https://www.nginx.com/wp-content/uploads/2015/04/nginx_n_icon_green.png" alt="Nginx"></a>
 </p>
 
 <p>&nbsp;</p>
