@@ -1,0 +1,36 @@
+{
+  "light": {
+    "name": "Nginx",
+    "filename": "userDefineLang_nginx.xml",
+    "background": "FFFFFF",
+    "colors": {
+      "default": "202020",
+      "comment": "707070",
+      "number": "8A4600",
+      "variable": "AA00AA",
+      "named_location": "0000CC",
+      "structure": "0000AA",
+      "directive": "AA0000",
+      "parameter": "006666",
+      "operator": "505050",
+      "string": "8A4600"
+    }
+  },
+  "dark": {
+    "name": "Nginx-Dark",
+    "filename": "userDefineLang_nginx_dark.xml",
+    "background": "202020",
+    "colors": {
+      "default": "E8E8E8",
+      "comment": "A0A0A0",
+      "number": "FFB86C",
+      "variable": "88EE88",
+      "named_location": "FFEE88",
+      "structure": "FFFF88",
+      "directive": "66DDFF",
+      "parameter": "B8A0FF",
+      "operator": "FFAAAA",
+      "string": "FFB86C"
+    }
+  }
+}

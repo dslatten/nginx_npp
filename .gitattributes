@@ -1,0 +1,9 @@
+* text=auto
+*.xml text eol=lf
+*.json text eol=lf
+*.py text eol=lf
+*.txt text eol=lf
+*.conf text eol=lf
+*.md text eol=lf
+*.markdown text eol=lf
+*.yml text eol=lf

@@ -1,0 +1,13 @@
+{
+  "case_sensitive": true,
+  "line_comment": "#",
+  "fold_open": "{",
+  "fold_close": "}",
+  "operators": ["!~*", "!~", "!=", "~*", "^~", "=", "~", "^", "*", ";", "[", "]", "(", ")"],
+  "number_suffixes": ["ms", "k", "K", "m", "M", "g", "G", "s", "h", "d", "w", "y"],
+  "delimiters": [
+    {"open": "'", "escape": "\\", "close": "'", "nesting": 0, "style": "string"},
+    {"open": "\"", "escape": "\\", "close": "\"", "nesting": 0, "style": "string"},
+    {"open": "${", "escape": "", "close": "}", "nesting": 0, "style": "variable"}
+  ]
+}
