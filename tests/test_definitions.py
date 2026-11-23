@@ -2,6 +2,7 @@
 
 import copy
 import importlib.util
+import json
 from pathlib import Path
 import unittest
 import xml.etree.ElementTree as ET
@@ -45,6 +46,21 @@ class DefinitionsTest(unittest.TestCase):
             self.assertFalse(expected - words, expected - words)
             self.assertEqual(language.find("Settings/Global").get("caseIgnored"), "no")
             self.assertEqual(language.find("Settings/Prefix").get("Keywords4"), "no")
+
+    def test_catalog_directives_reach_both_downloads(self):
+        expected = set()
+        for filename in ("nginx-index.json", "community-2024.json", "openresty.json"):
+            catalog = json.loads((ROOT / "src" / "module-catalogs" / filename).read_text(encoding="utf-8"))
+            expected.update(catalog["directives"])
+            expected.update(catalog.get("retired_directives", []))
+        for language in self.languages:
+            lists = self.lists(language)
+            actual = set(" ".join(lists[f"Keywords{i}"] for i in range(1, 9)).split())
+            prefixes = tuple((lists["Keywords1"] + " " + lists["Keywords2"]).split())
+            missing = {word for word in expected - actual if not word.startswith(prefixes)}
+            self.assertFalse(missing, missing)
+            for number in (4, 6, 7, 8):
+                self.assertEqual(language.find("Settings/Prefix").get(f"Keywords{number}"), "no")
 
     def test_strings_comments_and_braced_variables_do_not_create_folds(self):
         for language in self.languages:

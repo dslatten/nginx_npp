@@ -1,6 +1,6 @@
 # Visual highlighting fixtures
 
-Open [`highlighting.conf`](highlighting.conf) in Notepad++ to review the generated UDLs. This file combines optional and version-dependent Nginx features through 1.31.9, placeholder certificate paths, and example upstreams. It is **not a deployable configuration** or an `nginx -t` test.
+Open [`highlighting.conf`](highlighting.conf) in Notepad++ to review the generated UDLs. This visual fixture combines Nginx, Nginx Plus, njs, and OpenResty directives with placeholder paths and upstreams. Use it to review highlighting in the editor.
 
 [`lexical-edge-cases.conf`](lexical-edge-cases.conf) is a compact companion for checking quotes, escapes, variables, comments, case sensitivity, and folding together. Its capitalized `Server` is deliberately invalid and should use the default text style.
 
@@ -9,6 +9,7 @@ Import the two XML files from the repository root, then select **Language > Ngin
 ## Review checklist
 
 - Modern directives such as `http2`, `http3`, `grpc_pass`, `ssl_certificate_cache`, `json_set`, `tunnel_pass`, and `ssl_preread` receive directive styling.
+- `js_import` (njs), `auth_jwt` (Nginx Plus), `more_set_headers` (Headers More), and `content_by_lua_file` (OpenResty Lua) receive the same directive styling.
 - `http`, `events`, `server`, `location`, and `stream` receive structural styling.
 - `$host`, `${host}`, `$request_id`, and variables in the predicate location receive variable styling outside quotes. Quoted strings keep one uniform style, including variables inside them.
 - `@fallback` receives named-location styling in both its declaration and its use.

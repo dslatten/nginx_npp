@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "scope": "Command names from all modules shipped in the official open-source Nginx release, including optional modules and every platform branch. Recognition does not imply that a module is enabled or a directive is valid in every context.",
+  "scope": "Core and historical Nginx release sources, including optional modules and all platform branches. The official directive index, OpenResty bundle, and 2024 community lists have separate provenance in src/module-catalogs/.",
   "compatibility": {
     "description": "Names from both original light and dark themes that are absent from the selected source release are retained in legacy, as are names removed in later updates. Historical coverage is the union of the listed official release snapshots and the bundled Vim core deprecated list. The original third-party fastcgi_cache_purge keyword is also retained.",
     "baseline_repository": "https://github.com/dslatten/nginx_npp",
@@ -17,8 +17,8 @@
         "proxy_downstream_buffer",
         "proxy_upstream_buffer"
       ],
-      "version": "1.31.9",
-      "source_url": "https://nginx.org/download/nginx-1.31.9.tar.gz"
+      "version": "1.31.10",
+      "source_url": "https://nginx.org/download/nginx-1.31.10.tar.gz"
     },
     "historical_releases": {
       "0.8.55": {
@@ -46,7 +46,7 @@
           "worker_rlimit_sigpending",
           "worker_threads"
         ],
-        "compared_with_version": "1.31.9"
+        "compared_with_version": "1.31.10"
       },
       "1.8.1": {
         "version": "1.8.1",
@@ -80,7 +80,7 @@
           "worker_rlimit_sigpending",
           "worker_threads"
         ],
-        "compared_with_version": "1.31.9"
+        "compared_with_version": "1.31.10"
       }
     }
   },
@@ -94,12 +94,12 @@
     ]
   },
   "nginx": {
-    "version": "1.31.9",
-    "source_url": "https://nginx.org/download/nginx-1.31.9.tar.gz",
+    "version": "1.31.10",
+    "source_url": "https://nginx.org/download/nginx-1.31.10.tar.gz",
     "command_sources_sha256": "c97a197fac5ed745501bd8d2a2199b89ea5be25610d1f846d146ef8158b98bde",
     "command_arrays": 108,
     "source_files": 107,
     "unique_directives": 655,
-    "archive_sha256": "a11c5eeee2e257f4478f0e649f84b0040787d277d2d3e5233952aa6b6dcb80ad"
+    "archive_sha256": "a9b690957fca84abdae8a9b52d66b1bb459282d7f01fe4b94b498ed8e977bdb3"
   }
 }

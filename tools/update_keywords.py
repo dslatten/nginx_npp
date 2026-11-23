@@ -210,7 +210,7 @@ def load_sources(path):
     if not path.exists():
         return {
             "schema_version": 1,
-            "scope": "Command names from all modules shipped in the official open-source Nginx release, including optional modules and every platform branch. Recognition does not imply that a module is enabled or a directive is valid in every context.",
+            "scope": "Core and historical Nginx release sources, including optional modules and all platform branches. The official directive index, OpenResty bundle, and 2024 community lists have separate provenance in src/module-catalogs/.",
             "compatibility": {
                 "description": "Names from both original light and dark themes that are absent from the selected source release are retained in legacy, as are names removed in later updates. Historical coverage is the union of the listed official release snapshots and the bundled Vim core deprecated list. The original third-party fastcgi_cache_purge keyword is also retained.",
                 "baseline_repository": "https://github.com/dslatten/nginx_npp",

@@ -13,36 +13,90 @@ GROUPS = (
     "variable_prefixes", "named_location_prefixes", "structural",
     "directives", "legacy", "parameters",
 )
+# Notepad++ setUserLexer copies each keyword group into a 30 * 1024 byte
+# buffer (NppConstants.h: max_char), including its terminating NUL. Leave
+# headroom and count UTF-8 bytes, not Python characters, before that copy.
+MAX_KEYWORD_BYTES = 29999
+DIRECTIVE_GROUPS = (3, 5, 6, 7)  # Zero-based Keywords4, Keywords6-8.
+REQUIRED_CATALOGS = ("nginx-index.json", "community-2024.json", "openresty.json")
 
 
 def read_json(root, name):
     return json.loads((root / "src" / name).read_text(encoding="utf-8"))
 
 
-def keyword_groups(vocabulary):
+def validate_words(words, label):
+    if not isinstance(words, list) or any(
+        not isinstance(word, str) or not word or re.search(r"\s", word)
+        for word in words
+    ):
+        raise ValueError(f"{label}: expected a list of nonempty single tokens")
+    if words != sorted(set(words)):
+        raise ValueError(f"{label}: tokens must be sorted and unique")
+
+
+def module_catalogs(root):
+    catalogs = {}
+    directory = root / "src" / "module-catalogs"
+    missing = [name for name in REQUIRED_CATALOGS if not (directory / name).is_file()]
+    if missing:
+        raise ValueError("Missing required module catalogs: " + ", ".join(missing))
+    for path in sorted(directory.glob("*.json")):
+        catalog = json.loads(path.read_text(encoding="utf-8"))
+        if not isinstance(catalog, dict) or "directives" not in catalog:
+            raise ValueError(f"{path.name}: expected an object with a directives array")
+        current = catalog["directives"]
+        retired = catalog.get("retired_directives", [])
+        validate_words(current, path.name + ": directives")
+        validate_words(retired, path.name + ": retired_directives")
+        catalogs[path.name] = sorted(set(current) | set(retired))
+    return catalogs
+
+
+def keyword_groups(vocabulary, catalogs=None):
     if set(vocabulary) != set(GROUPS):
         raise ValueError("keywords.json must contain exactly: " + ", ".join(GROUPS))
     seen = set()
     for name, words in vocabulary.items():
-        if not isinstance(words, list) or any(
-            not isinstance(word, str) or not word or re.search(r"\s", word)
-            for word in words
-        ):
-            raise ValueError(f"{name}: expected a list of nonempty single tokens")
-        if words != sorted(set(words)):
-            raise ValueError(f"{name}: tokens must be sorted and unique")
+        validate_words(words, name)
         overlap = seen.intersection(words)
         if overlap:
             raise ValueError(f"{name}: tokens occur in multiple groups: {sorted(overlap)}")
         seen.update(words)
+
+    directives = set(vocabulary["directives"]) | set(vocabulary["legacy"])
+    reserved = seen - directives
+    prefixes = tuple(vocabulary["variable_prefixes"] + vocabulary["named_location_prefixes"])
+    for name, words in (catalogs or {}).items():
+        validate_words(words, name)
+        # Keep existing structural, parameter and prefix styles. Prefix groups
+        # are checked first by LexUser, so duplicating their matches elsewhere
+        # cannot give those tokens a directive style.
+        directives.update(word for word in words
+                          if word not in reserved and not word.startswith(prefixes))
     result = [
         vocabulary["variable_prefixes"], vocabulary["named_location_prefixes"],
-        vocabulary["structural"], sorted(vocabulary["directives"] + vocabulary["legacy"]),
+        vocabulary["structural"], [],
         vocabulary["parameters"], [], [], [],
     ]
-    # Keep well below the UDL keyword editor's 30,000-character limit.
+
+    slot = 0
+    size = 0
+    for word in sorted(directives):
+        word_size = len(word.encode("utf-8"))
+        if word_size > MAX_KEYWORD_BYTES:
+            raise ValueError("A directive exceeds the UDL editor limit")
+        added_size = word_size + bool(result[DIRECTIVE_GROUPS[slot]])
+        if size + added_size > MAX_KEYWORD_BYTES:
+            slot += 1
+            if slot == len(DIRECTIVE_GROUPS):
+                raise ValueError("Directives exceed the four available UDL keyword groups")
+            size = 0
+            added_size = word_size
+        result[DIRECTIVE_GROUPS[slot]].append(word)
+        size += added_size
     for number, words in enumerate(result, 1):
-        if len(" ".join(words)) >= 30000:
+        if len(" ".join(words).encode("utf-8")) > MAX_KEYWORD_BYTES:
             raise ValueError(f"Keywords{number} exceeds the UDL editor limit")
     return result
 
@@ -101,7 +155,7 @@ def make_udl(groups, lexer, theme, version):
     style("LINE COMMENTS", "comment", 2)
     style("NUMBERS", "number")
     roles = ("variable", "named_location", "structure", "directive", "parameter",
-             "default", "default", "default")
+             "directive", "directive", "directive")
     for number, role in enumerate(roles, 1):
         style(f"KEYWORDS{number}", role, 1 if number in (2, 3) else 0)
     style("OPERATORS", "operator")
@@ -116,7 +170,7 @@ def make_udl(groups, lexer, theme, version):
 
 
 def build_outputs(root=ROOT):
-    groups = keyword_groups(read_json(root, "keywords.json"))
+    groups = keyword_groups(read_json(root, "keywords.json"), module_catalogs(root))
     lexer = read_json(root, "lexer.json")
     themes = read_json(root, "themes.json")
     version = read_json(root, "sources.json")["nginx"]["version"]
@@ -130,14 +184,19 @@ def build_outputs(root=ROOT):
         "Variable and FastCGI/SCGI parameter prefixes (prefix matching).",
         "Named location prefix (prefix matching).",
         "Structural directives and include (exact matching).",
-        "Current and retained legacy directive names (exact matching).",
+        "Current, legacy and module directive names (exact matching; Keywords4 and any overflow in Keywords6-8).",
         "Common parameter values (exact matching).",
     )
     for number, description in enumerate(descriptions, 1):
         words = groups[number - 1]
+        source_note = ("Generated by tools/generate.py from src/keywords.json.\n"
+                       "Edit that JSON source and regenerate both XML themes.\n")
+        if number == 4:
+            words = [word for index in DIRECTIVE_GROUPS for word in groups[index]]
+            source_note = ("Generated by tools/generate.py from src/keywords.json and src/module-catalogs/*.json.\n"
+                           "Edit those JSON sources and regenerate both XML themes.\n")
         text = (f"Words{number}\n{'=' * 6}\n\n{description}\n\n"
-                "Generated by tools/generate.py from src/keywords.json.\n"
-                "Edit that JSON source and regenerate both XML themes.\n"
+                f"{source_note}"
                 "Editing this reference file alone does not change highlighting.\n\n"
                 "Space-separated:\n" + " ".join(words) + "\n\n"
                 "One per line:\n" + "\n".join(words) + "\n")

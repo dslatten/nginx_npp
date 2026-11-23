@@ -26,9 +26,14 @@ If you installed XML files directly in Notepad++'s `userDefineLangs` directory, 
 
 ## Coverage
 
-The keyword source targets **Nginx 1.31.9** and its bundled open source modules, including optional modules. It retains every keyword from this project's original light and dark definitions, and legacy directives identified in the official 0.8.55 and 1.8.1 sources, including SPDY. Future vocabulary updates preserve older directive names automatically. Highlighting does not establish that a directive is available in a particular Nginx build or valid in its current context.
+Both themes recognize **1,155 distinct directive names**.
 
-Coverage includes HTTP/2, HTTP/3 and QUIC, gRPC, stream configurations, modern TLS directives, and newer JSON and CONNECT-tunnel directives. This is not a complete vocabulary for Nginx Plus, njs, OpenResty, or third-party modules.
+- **NGINX Open Source 1.31.10.** Command names from the release source include optional and platform-specific modules, HTTP/2, HTTP/3, stream, gRPC, JSON, and CONNECT tunneling.
+- **The [official NGINX directive index](https://nginx.org/en/docs/dirindex.html).** The November 23, 2026 snapshot includes documented NGINX Plus, njs, OpenTelemetry, and ACME directives such as `auth_jwt`, `js_import`, `otel_trace`, and `acme_certificate`.
+- **[OpenResty 1.31.8.1](https://openresty.org/en/download.html).** Both themes include configuration directives from modules shipped in the release bundle, including Lua, Headers More, and optional modules. A directive such as `content_by_lua_block` receives directive coloring. The editor continues to use Nginx highlighting inside the block.
+- **Older configurations.** Both themes retain the original project's keywords, historical directives such as SPDY, and all directive names contributed in the 2024 light and dark pull requests.
+
+Notepad++ colors recognized names even when they appear as unquoted arguments. A highlighted name can belong to a module your server does not load. Independently distributed modules can define additional directives beyond these sources.
 
 The UDL handles comments, quoted strings, variables, named locations, and brace folding. Quoted strings use one consistent style, including any variables inside them. Outside strings, `$name` receives variable styling and `${name}` is protected from brace folding.
 
@@ -38,7 +43,8 @@ UDL highlighting does not validate directive contexts. A `#` embedded in an unqu
 
 The generated XML files are committed so users can install them without Python. To change the definitions, use **Python 3.9 or newer**. The tools use only the Python standard library.
 
-- [`src/keywords.json`](src/keywords.json) contains the shared vocabulary.
+- [`src/keywords.json`](src/keywords.json) contains the core and historical vocabulary, parameter names, and prefixes.
+- [`src/module-catalogs/`](src/module-catalogs) contains the official index, OpenResty, and community keyword lists. Each file records its source. The generator combines the lists and removes duplicates for both themes.
 - [`src/lexer.json`](src/lexer.json) contains the shared parsing and folding rules.
 - [`src/themes.json`](src/themes.json) contains the light and dark styles.
 - [`src/sources.json`](src/sources.json) records vocabulary provenance and the source version.
@@ -67,11 +73,23 @@ Replace `PATH` with the extracted Nginx source directory, quoting it if it conta
 
 To add coverage from another historical release, append `--legacy-source OLD_VERSION OLD_PATH` to the updater command. The option can be repeated. Historical sources enrich the compatibility list without replacing the current release's vocabulary. Provenance is recorded in `src/sources.json`.
 
+To refresh the other upstream sources, save the [NGINX directive index](https://nginx.org/en/docs/dirindex.html) as HTML and download an [OpenResty source archive](https://openresty.org/en/download.html). Run the commands below with the saved paths, the date you retrieved the index, and the matching OpenResty version. Both extractors run offline. Names that disappear from a later snapshot remain available for older configurations.
+
+```sh
+python tools/extract_directive_index.py --input PATH_TO_HTML --retrieved YYYY-MM-DD
+python tools/extract_openresty.py --archive PATH_TO_TAR_GZ --version OPENRESTY_VERSION
+python tools/generate.py
+python tools/generate.py --check
+python -m unittest discover -s tests -v
+```
+
 ### Validate a change
 
 Run the generation check and unit tests, then import both generated XML files into a current Notepad++ installation. Open [`examples/highlighting.conf`](examples/highlighting.conf) and [`examples/lexical-edge-cases.conf`](examples/lexical-edge-cases.conf), and follow the [visual review checklist](examples/README.md). Record the Notepad++ version and results when submitting a change. These fixtures are for highlighting review and are not intended to pass `nginx -t`.
 
 On November 22, 2026, both themes were loaded and visually checked in **Notepad++ 8.9.9.1 on Windows** using isolated settings directories. Checks covered modern directives, case sensitivity, empty strings, escaped quotes and backslashes, quoted comment markers, `$name` and `${name}`, named and predicate locations, and block folding. The light check used LF line endings; the dark check used a CRLF copy without a final newline. The GitHub Actions workflow checks generated files and runs the unit tests.
+
+On November 23, 2026, an automated check loaded each expanded theme in the same editor version and verified the assigned color at both ends of every directive name. All 1,155 passed in both themes, along with controls for unknown and uppercase words, variables, named locations, strings, and comments.
 
 ## AI assistance
 
@@ -79,6 +97,6 @@ The November 2026 refresh was developed with AI assistance from OpenAI Codex usi
 
 ## Contributions
 
-The 2024 keyword updates proposed by [jazini110 in PR #6](https://github.com/dslatten/nginx_npp/pull/6) and [PR #7](https://github.com/dslatten/nginx_npp/pull/7), and [stpettersens' HTTP/2 proposal in PR #8](https://github.com/dslatten/nginx_npp/pull/8), helped identify the need for this refresh. Earlier contributions, including duzun's dark theme and string handling, remain recorded in the repository history.
+Both themes incorporate the directive lists that jazini110 contributed in [PR #6](https://github.com/dslatten/nginx_npp/pull/6) and [PR #7](https://github.com/dslatten/nginx_npp/pull/7). [Stpettersens' HTTP/2 proposal in PR #8](https://github.com/dslatten/nginx_npp/pull/8) also helped identify the need for this refresh. Earlier contributions, including duzun's dark theme and string handling, remain recorded in the repository history.
 
 For directive behavior and supported contexts, consult the [Nginx documentation](https://nginx.org/en/docs/). For UDL customization, use the [Notepad++ UDL manual](https://npp-user-manual.org/docs/user-defined-language-system/).
