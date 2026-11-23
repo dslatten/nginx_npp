@@ -1,5 +1,9 @@
 # Nginx syntax highlighting for Notepad++
 
+<p align="center">
+  <img src="assets/nginx-notepad-plus-plus.png" width="200" alt="The Notepad++ chameleon curled around the NGINX badge on a folded notebook page">
+</p>
+
 User-defined languages (UDLs) for editing Nginx configuration files in Notepad++. The light and dark versions share their keywords and parsing rules, with separate colors.
 
 ## Install
