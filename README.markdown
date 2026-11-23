@@ -71,7 +71,7 @@ On November 22, 2026, both themes were loaded and visually checked in **Notepad+
 
 ## AI assistance
 
-The November 2026 refresh was developed with AI assistance from OpenAI Codex, a coding agent based on GPT-6. The changes were checked with automated tests and visual checks in Notepad++ 8.9.9.1, as described above.
+The November 2026 refresh was developed with AI assistance from OpenAI Codex using GPT-6 Astra. The changes were checked with automated tests and visual checks in Notepad++ 8.9.9.1, as described above.
 
 ## Contributions
 
