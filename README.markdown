@@ -97,6 +97,13 @@ The November 2026 refresh was developed with AI assistance from OpenAI Codex usi
 
 ## Contributions
 
-Both themes incorporate the directive lists that jazini110 contributed in [PR #6](https://github.com/dslatten/nginx_npp/pull/6) and [PR #7](https://github.com/dslatten/nginx_npp/pull/7). [Stpettersens' HTTP/2 proposal in PR #8](https://github.com/dslatten/nginx_npp/pull/8) also helped identify the need for this refresh. Earlier contributions, including duzun's dark theme and string handling, remain recorded in the repository history.
+Darren Slatten created the original Nginx language definition for Notepad++.
+
+- Dumitru Uzun (`duzun`) contributed the dark theme and added highlighting for quoted strings. [PR #2](https://github.com/dslatten/nginx_npp/pull/2) and [PR #3](https://github.com/dslatten/nginx_npp/pull/3)
+- Alyaxey Yaskevich (`yaskevich`) corrected the Notepad++ menu path in the installation instructions. [PR #4](https://github.com/dslatten/nginx_npp/pull/4)
+- `jazini110` contributed the 2024 directive lists now included in both themes. [PR #6](https://github.com/dslatten/nginx_npp/pull/6) and [PR #7](https://github.com/dslatten/nginx_npp/pull/7)
+- Sam Saint-Pettersen (`stpettersens`) contributed the `http2` keyword. [PR #8](https://github.com/dslatten/nginx_npp/pull/8)
+- `mxxcon` reported that the highlighting colors were hard to read with the Zenburn theme. [Issue #1](https://github.com/dslatten/nginx_npp/issues/1)
+- Yaroslav Nakonechnikov (`mrPsycho`) reported unexpected code folding and included a screenshot. [Issue #5](https://github.com/dslatten/nginx_npp/issues/5)
 
 For directive behavior and supported contexts, consult the [Nginx documentation](https://nginx.org/en/docs/). For UDL customization, use the [Notepad++ UDL manual](https://npp-user-manual.org/docs/user-defined-language-system/).
